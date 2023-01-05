@@ -1,4 +1,7 @@
 package com.example.thingsFlow.service;
 
-public class BoardService {
+import org.springframework.stereotype.Service;
+
+@Service
+public class LoadService {
 }
