@@ -1,4 +1,4 @@
 package com.example.thingsFlow.validation;
 
-public class BoardValidation {
+public class LoadValidation {
 }
