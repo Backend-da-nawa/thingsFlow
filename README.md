@@ -59,6 +59,11 @@
     - 외부 API는 자유, https://www.weatherapi.com 에 가입 후 Real-time Weather API 사용하시는 것을 추천
     - 발급 받으신 API Key 는 전달해주지 않아도 됨
     - 게시글 작성 시 자동으로 데이터베이스에 추가되고, 수정은 불가
+- 게시글의 개수가 많을 때, 사용자가 앱이나 웹에서 스크롤을 내릴 때마다 오래된 글들이
+  계속 로드 되는 형태로 API 를 수정 [무한 스크롤]
+  - 게시글이 중복으로 나타나면 안됨
+  - 추가 로드는 20 개 단위
+
 
 ### Condition
 1. DBMS 는 PostgreSQL, MySQL, SQLite 중 하나를 사용
