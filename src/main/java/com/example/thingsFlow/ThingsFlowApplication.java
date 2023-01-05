@@ -1,13 +1,13 @@
-package com.example.thinksFlow;
+package com.example.thingsFlow;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ThinksFlowApplication {
+public class ThingsFlowApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ThinksFlowApplication.class, args);
+		SpringApplication.run(ThingsFlowApplication.class, args);
 	}
 
 }
