@@ -1,4 +1,4 @@
 package com.example.thingsFlow.dto;
 
-public class BoardDTO {
+public class LoadDTO {
 }
