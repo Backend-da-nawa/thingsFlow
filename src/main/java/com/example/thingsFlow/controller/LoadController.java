@@ -1,4 +1,11 @@
 package com.example.thingsFlow.controller;
 
-public class BoardController {
+import lombok.NoArgsConstructor;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@NoArgsConstructor
+public class LoadController {
+
+
 }
