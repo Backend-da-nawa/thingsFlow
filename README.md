@@ -86,4 +86,25 @@
 
 ---
 ## Issue
-
+> org.springframework.context.ApplicationContextException: Failed to start bean 'documentationPluginsBootstrapper'; nested exception is java.lang.NullPointerException
+- 원인 
+  - Spring Boot 2.6버전 이후에 요청 경로를 ControllerHandler 에 매칭시키기 위한 것이 작동.
+  - spring.mvc.pathmatch.matching-strategy 기본 값이 ant_path_matcher 에서 path_pattern_parser 로 변경되어 있음
+- 해결
+  - application.properties 에 추가
+  > spring.mvc.pathmatch.matching-strategy=ant_path_matcher
+---
+> Spring Security 를 사용하고 Client 에서 Controller 로 Mapping 이 막히는 이슈
+- Spring Security 란,
+  - Spring 기반 애플리케이션의 보안(인증과 권한)을 담당하는 프레임워크
+  - Filter 기반으로 동작
+  - Filter 는 Dispatcher Servlet 으로 가기전에 적용되므로 가장 먼저 URL 의 요청을 받지만, Interceptor 는 Dispatcher 와 Controller 사이에 위치
+  - Spring MVC Request Lifecycle <br>
+  ![img.png](img/img.png)
+  - Authentication Architecture <br>
+  ![img.png](img/img2.png)
+- 원인
+  - 로그인 등 인증 수단이 없기에 Filter 에서 인가받지 않은 사용자로 분류되어 Dispatcher Servlet 으로 접근 불가
+- 해결
+  1. 접근을 허용하는 경로를 설정
+  2. 인증 로직 구현
