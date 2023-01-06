@@ -20,16 +20,18 @@ public class BoardService {
     private final BoardRepository boardRepository;
 
     @Transactional
-    public Long updateBoard(Long id, String password) throws Exception {
+    public Long updateBoard(Long id,String password) throws Exception {
         try {
             Optional<Board> optional= boardRepository.findById(id);
-            Board oldBoard ;
-            if(optional==oldBoard.password);//oldBoard의 password와 optional의 password가 같으면 수정하기
-            else  throw  new Exception();
+            Board oldBoard;
+            if(optional.isPresent()){
+                oldBoard=optional.get();
+            } else  throw  new Exception();
+
 
             UpdateDTO updateDTO = UpdateDTO.builder()
                     .id(id)
-                    .title(String.valueOf(title))
+                    .title()
                     .password(password)
                     .build();
             Board newBoard= Board.builder().updateDTO(updateDTO).build();
