@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class BoardController {
     private BoardService boardService;
-    @GetMapping(value = "/post/edit/{id}")
-    public Long edit(@PathVariable("id") long id, @RequestParam("password") String password) throws Exception{
+    @GetMapping(value = "/post/update/{id}")
+    public Long update(@PathVariable("id") long id, @RequestParam("password") String password) throws Exception{
         return boardService.updateBoard(id,password);
     }
 
