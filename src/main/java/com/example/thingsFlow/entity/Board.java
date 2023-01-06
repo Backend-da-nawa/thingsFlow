@@ -2,6 +2,7 @@ package com.example.thingsFlow.entity;
 import com.example.thingsFlow.dto.UpdateDTO;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +21,10 @@ public class Board {
     private String password;
 
     @CreationTimestamp
-    private LocalDateTime time;
+    private LocalDateTime createTime;
+
+    @UpdateTimestamp
+    private LocalDateTime updateTime;
 
     @Builder
     public Board(UpdateDTO updateDTO) {
