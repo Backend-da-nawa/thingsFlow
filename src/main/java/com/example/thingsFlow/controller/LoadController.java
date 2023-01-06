@@ -20,7 +20,7 @@ public class LoadController {
 
     private LoadService loadService;
 
-    @GetMapping("/load")
+    @GetMapping("/board")
     @ApiOperation(value = "조회할 게시글을 페이지로 반환하는 메서드")
     public Slice<Board> load(final Pageable pageable) {
         return loadService.load(pageable);
