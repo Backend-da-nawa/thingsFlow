@@ -1,4 +1,4 @@
-package com.example.thingsFlow.swagger;
+package com.example.thingsFlow.config.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

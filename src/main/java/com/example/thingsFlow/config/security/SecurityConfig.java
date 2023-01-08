@@ -1,4 +1,4 @@
-package com.example.thingsFlow.security;
+package com.example.thingsFlow.config.security;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
