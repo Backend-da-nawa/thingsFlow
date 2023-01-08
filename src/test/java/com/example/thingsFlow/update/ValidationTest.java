@@ -1,2 +1,4 @@
-package com.example.thingsFlow.update;public class ValidationTest {
+package com.example.thingsFlow.update;
+
+public class ValidationTest {
 }
