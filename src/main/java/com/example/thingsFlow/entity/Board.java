@@ -28,11 +28,15 @@ public class Board {
 
     @Builder
     public Board(UpdateDTO updateDTO) {
-        this.id = getId();
-        this.title=getTitle();
-        this.content=getContent();
-        this.password=getPassword();
+        this.id = updateDTO.getId();
+        this.title = updateDTO.getTitle();
+        this.content = updateDTO.getContent();
+        this.password = updateDTO.getPassword();
     }
 
+    public void update(UpdateDTO updateDTO) {
+        this.title = updateDTO.getTitle();
+        this.content = updateDTO.getContent();
+    }
 
 }
