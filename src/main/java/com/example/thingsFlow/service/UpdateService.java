@@ -6,7 +6,6 @@ import com.example.thingsFlow.repository.BoardRepository;
 import com.example.thingsFlow.validation.UpdateValidation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.Map;
 import java.util.Optional;
@@ -38,15 +37,6 @@ public class UpdateService {
 
     private Board getBoard(Long id) {
         Optional<Board> optional = boardRepository.findById(id);
-        Board oldBoard;
-        if (optional.isPresent()) {
-            oldBoard = optional.get();
-        } else throw new IllegalArgumentException("[ERROR] 해당하는 게시글이 없습니다.");
-        return oldBoard;
-    }
-
-    private Board getBoard(UpdateDTO updateDTO) {
-        Optional<Board> optional = boardRepository.findById(updateDTO.getId());
         Board oldBoard;
         if (optional.isPresent()) {
             oldBoard = optional.get();
