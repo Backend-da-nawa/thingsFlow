@@ -100,11 +100,38 @@
   - Filter 기반으로 동작
   - Filter 는 Dispatcher Servlet 으로 가기전에 적용되므로 가장 먼저 URL 의 요청을 받지만, Interceptor 는 Dispatcher 와 Controller 사이에 위치
   - Spring MVC Request Lifecycle <br>
-  ![img.png](img/img.png)
+  ![img.png](img/SpringSecurity1.png)
   - Authentication Architecture <br>
-  ![img.png](img/img2.png)
+  ![img.png](img/SpringSecurity2.png)
 - 원인
   - 로그인 등 인증 수단이 없기에 Filter 에서 인가받지 않은 사용자로 분류되어 Dispatcher Servlet 으로 접근 불가
 - 해결
   1. 접근을 허용하는 경로를 설정
   2. 인증 로직 구현
+---
+> CreationTimeStamp Annotation VS CreatedDate Annotation
+- CreationTimeStamp Annotation 
+  - Hibernate 에서 제공하는 어노테이션
+  - 데이터베이스로 넘어갈 때 자동으로 입력
+  - milliseconds 단위까지 입력 가능
+- CreatedDate
+  - JPA 에서 제공하는 어노테이션
+  - Spring Auditing 기술을 사용 
+    - JPA 는 JPA 고유 메모리 공간(context)을 이용해서 엔티티 객체들을 관리
+    - 관리되는 객체들이 변경되면 데이터에 반영되는 형식 -> 재사용하는 방식
+    - 객체의 생성, 수정 등 변화를 감지하고 감지되면 자동 입력
+    - microseconds 단위까지 입력 가능
+- CreationTimeStamp 대신 CreatedDate 를 지향함.
+  - CreationTimeStamp -> CreatedDate
+  - UpdateTimestamp -> LastModifiedDate
+---
+> 수정하는 작업에서 repository.save(entity) 를 실행할 때 오류 발생. <br>
+> 오류 내용 : 해당 entity 가 존재하기 때문에 저장할 수 없음 <- 대충 이런 느낌...
+- 영속성 컨텍스트
+  - 엔티티를 영구적으로 저장하는 환경
+  - 애플리케이션 DB 사이에서 객체를 보관하는 일종의 가상 DB 역할
+  - 따라서, Entity Manager 를 통해 저장하거나 조회하면 Entity Manager 는 영속성 컨텍스트 Entity 를 보관 및 관리
+  - repository.update(entity)를 하지 않고 객체의 일부분만 바꿔줘도 영속성 컨텍스트로 인해 update 가 자동으로 수행
+  
+  ![img.png](img/PersistenceContext.png)
+---
