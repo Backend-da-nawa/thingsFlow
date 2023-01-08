@@ -5,7 +5,6 @@ import com.example.thingsFlow.entity.Board;
 import com.example.thingsFlow.repository.BoardRepository;
 import com.example.thingsFlow.validation.UpdateValidation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -16,52 +15,42 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class UpdateService {
-    @Autowired
     private final BoardRepository boardRepository;
-
-    @Autowired
     private final UpdateValidation updateValidation;
-
     @Transactional
-    public Long updateBoard(UpdateDTO updateDTO) throws Exception {
-        try {
-            Optional<Board> optional = boardRepository.findById(updateDTO.getId());
-            Board oldBoard;
-            if (optional.isPresent()) {
-                oldBoard = optional.get();
-            } else throw new Exception();
+    public Board updateBoard(UpdateDTO updateDTO) {
+        Board board = boardRepository.findById(updateDTO.getId())
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다. id=" + updateDTO.getId()));
 
-            updateValidation.validatePassword(oldBoard, updateDTO);
+        updateValidation.validatePassword(board, updateDTO);
 
-            UpdateDTO newDTO = UpdateDTO.builder()
-                    .id(oldBoard.getId())
-                    .title(updateDTO.getTitle())
-                    .content(updateDTO.getContent())
-                    .password(oldBoard.getPassword())
-                    .build();
-            Board newBoard = Board.builder().updateDTO(newDTO).build();
-            boardRepository.save(newBoard);
-
-        } catch (IllegalArgumentException e) {
-            throw new IllegalAccessException("에러메세지");
-        }
-        return 1L;
+        board.update(updateDTO);
+        return board;
     }
     @Transactional
-    public Long validatePassword(Long id, Map map) throws Exception {
-        try {
-            Optional<Board> optional = boardRepository.findById(id);
-            Board oldBoard;
-            if (optional.isPresent()) {
-                oldBoard = optional.get();
-            } else throw new Exception();
-            String oldPassword=oldBoard.getPassword();
+    public Long validatePassword(Long id, Map map) {
+        String oldPassword = getBoard(id).getPassword();
 
-            updateValidation.validatePassword(id,map,oldPassword);
+        updateValidation.validatePassword(map, oldPassword);
 
-        } catch (IllegalArgumentException e) {
-            throw new IllegalAccessException("에러메세지");
-        }
         return 1L;
+    }
+
+    private Board getBoard(Long id) {
+        Optional<Board> optional = boardRepository.findById(id);
+        Board oldBoard;
+        if (optional.isPresent()) {
+            oldBoard = optional.get();
+        } else throw new IllegalArgumentException("[ERROR] 해당하는 게시글이 없습니다.");
+        return oldBoard;
+    }
+
+    private Board getBoard(UpdateDTO updateDTO) {
+        Optional<Board> optional = boardRepository.findById(updateDTO.getId());
+        Board oldBoard;
+        if (optional.isPresent()) {
+            oldBoard = optional.get();
+        } else throw new IllegalArgumentException("[ERROR] 해당하는 게시글이 없습니다.");
+        return oldBoard;
     }
 }

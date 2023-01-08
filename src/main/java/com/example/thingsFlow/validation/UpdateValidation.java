@@ -13,7 +13,6 @@ public class UpdateValidation {
 
     public void validatePassword(Board oldBoard, UpdateDTO updateDTO){
       if(updateDTO.getPassword().equals(oldBoard.getPassword())){
-          return;
       }
       else {
           throw new IllegalArgumentException("비밀번호가 틀렸습니다");
@@ -21,9 +20,8 @@ public class UpdateValidation {
 
     }
 
-    public void validatePassword(Long id, Map map, String oldPassword){
+    public void validatePassword(Map map, String oldPassword){
         if(oldPassword.equals(map.get("password"))){
-            return;
         }
         else {
             throw new IllegalArgumentException("비밀번호가 틀렸습니다");
