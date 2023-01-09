@@ -19,7 +19,7 @@ public class SwaggerConfig {
 
     private static final String API_NAME = "Board API";
     private static final String NAME = "Dong-Yeol";
-    private static final String URL = "https://www.notion.so/d3996619afd147a8a1afa0f1d1b1c283?v=db83a96204eb415c9b5095d5507cfd59";
+    private static final String URL = "https://github.com/Backend-da-nawa";
     private static final String E_MAIL = "ehfql6363@naver.com";
     private static final String API_DESCRIPTION = "띵스플로우 API 명세서";
     private String version;
@@ -29,10 +29,10 @@ public class SwaggerConfig {
                 API_NAME,
                 API_DESCRIPTION,
                 version,
-                "https://naver.com",
+                "#",
                 new Contact(NAME, URL, E_MAIL),
                 "License",
-                "https://naver.com",
+                "#",
                 new ArrayList<>());
     }
 
