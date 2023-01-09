@@ -1,5 +1,5 @@
 package com.example.thingsFlow.entity;
-import com.example.thingsFlow.dto.BoardDTO;
+import com.example.thingsFlow.dto.DeleteBoardDTO;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -30,11 +30,11 @@ public class Board {
     private LocalDateTime updatedTime;
 
     @Builder
-    public Board(BoardDTO updateDTO) {
-        this.id = updateDTO.getId();
-        this.title = updateDTO.getTitle();
-        this.content = updateDTO.getContent();
-        this.password = updateDTO.getPassword();
+    public Board(DeleteBoardDTO deleteBoardDTO) {
+        this.id = deleteBoardDTO.getId();
+        this.title = deleteBoardDTO.getTitle();
+        this.content = deleteBoardDTO.getContent();
+        this.password = deleteBoardDTO.getPassword();
     }
 
 
