@@ -1,9 +1,11 @@
 package com.example.thingsFlow.entity;
-import com.example.thingsFlow.dto.BoardDTO;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
@@ -11,6 +13,7 @@ import java.time.LocalDateTime;
 @Entity
 @Data
 @NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class Board {
     @Id
     @GeneratedValue
@@ -19,8 +22,11 @@ public class Board {
     private String content;
     private String password;
 
-    @CreationTimestamp
-    private LocalDateTime time;
+    @CreatedDate
+    private LocalDateTime createdTme;
+
+    @LastModifiedDate
+    private LocalDateTime updatedTime;
 
 
 }

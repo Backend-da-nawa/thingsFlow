@@ -9,12 +9,8 @@ import java.util.Map;
 public class DeleteValidation {
 
     public void validatePassword(Map map, String oldPassword){
-        if(oldPassword.equals(map.get("password"))){
-        }
-        else {
+        if(!oldPassword.equals(map.get("password"))){
             throw new IllegalArgumentException("비밀번호가 틀렸습니다");
         }
-
     }
-
 }
