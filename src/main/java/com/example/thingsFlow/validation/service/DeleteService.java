@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class BoardService {
+public class DeleteService {
 
     private final BoardRepository boardRepository;
 
