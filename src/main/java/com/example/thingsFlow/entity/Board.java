@@ -1,4 +1,5 @@
 package com.example.thingsFlow.entity;
+import com.example.thingsFlow.dto.BoardDTO;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -27,6 +28,14 @@ public class Board {
 
     @LastModifiedDate
     private LocalDateTime updatedTime;
+
+    @Builder
+    public Board(BoardDTO updateDTO) {
+        this.id = updateDTO.getId();
+        this.title = updateDTO.getTitle();
+        this.content = updateDTO.getContent();
+        this.password = updateDTO.getPassword();
+    }
 
 
 }
