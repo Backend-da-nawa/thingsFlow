@@ -3,27 +3,21 @@ package com.example.thingsFlow.dto;
 import com.example.thingsFlow.entity.Board;
 import lombok.*;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-
 @Data
-public class InsertDTO {
+public class BoardDTO {
+    private Long id;
     private String title;
     private String content;
     private String password;
     private String weather;
     private String uploaded;
 
-    public InsertDTO(Board board) {
-        this(board.getTitle(), board.getContent(), board.getPassword(), board.getWeather(), board.getUploaded());
-    }
 
     @Builder
-    public InsertDTO(String title, String content, String password, String weather, String uploaded) {
+    public BoardDTO(Long id, String title, String content, String password) {
+        this.id = id;
         this.title = title;
         this.content = content;
         this.password = password;
-        this.weather = weather;
-        this.uploaded = uploaded;
     }
 }
