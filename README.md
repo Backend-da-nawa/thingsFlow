@@ -8,12 +8,12 @@
 - **황승수** : 게시글 등록
 ---
 ## Contents
-- [Tech & Stack]()
-- [Summary]()
-- [Feature List]()
-- [ERD]()
-- [TEST-CODE]()
-- [Issue]()
+- [Tech & Stack](#tech--stack)
+- [Summary](#summary)
+- [Feature List](#feature-list)
+- [ERD](#erd)
+- [TEST-CODE](#test-code)
+- [Issue](#issue)
 ---
 
 ## Tech & Stack
@@ -41,7 +41,9 @@
 <img src="https://img.shields.io/badge/Notion-000000?style=flat&logo=Notion&logoColor=white"><br>
 ---
 ## Summary
-- 내용
+- 사용자는 게시글을 등록, 수정, 삭제가 가능
+- 등록할 때 비밀번호를 설정하며 이는 수정 및 삭제에 검증 용도로 사용
+- 비밀번호는 6자리 이상이어야 하며, 숫자 1개 이상 필수 포함
 
 ---
 ## Feature List
@@ -72,13 +74,12 @@
 4. ORM 을 사용
 
 ### API Specification
-
-
+머지 후 작성
 
 
 ---
 ## ERD
-
+![img.png](img/ERD.png)
 
 ---
 ## Test-Code
