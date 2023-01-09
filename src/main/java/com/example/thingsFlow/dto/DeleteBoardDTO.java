@@ -1,10 +1,9 @@
 package com.example.thingsFlow.dto;
 
-import com.example.thingsFlow.entity.Board;
 import lombok.*;
 
 @Data
-public class BoardDTO {
+public class DeleteBoardDTO {
     private Long id;
     private String title;
     private String content;
@@ -14,7 +13,7 @@ public class BoardDTO {
 
 
     @Builder
-    public BoardDTO(Long id, String title, String content, String password) {
+    public DeleteBoardDTO(Long id, String title, String content, String password) {
         this.id = id;
         this.title = title;
         this.content = content;
