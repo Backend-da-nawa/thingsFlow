@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Map;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,11 +17,12 @@ public class DeleteService {
     private final DeleteValidation deleteValidation;
 
     @Transactional
-    public Long validatePassword(Long id, Map map){
-        String oldPassword = getBoard(id).getPassword();
+    public Board validatePassword(Long id, Map map){
+        Board board = getBoard(id);
+        String oldPassword = board.getPassword();
         deleteValidation.validatePassword(map, oldPassword);
-        boardRepository.deleteById(id);
-        return 1L;
+        boardRepository.delete(board);
+        return board;
     }
 
     private Board getBoard(Long id){
