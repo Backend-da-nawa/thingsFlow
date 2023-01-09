@@ -32,6 +32,8 @@ public class Board {
     @Column
     private String password;
 
+    private String weather;
+
     @CreatedDate
     @Column
     private LocalDateTime createdTime;
@@ -46,5 +48,12 @@ public class Board {
         this.content = loadDTO.getContent();
         this.title = loadDTO.getTitle();
         this.password = loadDTO.getPassword();
+    }
+
+    public Board(String title, String content, String password, String weather) {
+        this.title = title;
+        this.content = content;
+        this.password = password;
+        this.weather = weather;
     }
 }
