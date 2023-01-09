@@ -2,6 +2,7 @@ package com.example.thingsFlow.validation.service;
 
 import com.example.thingsFlow.entity.Board;
 import com.example.thingsFlow.repository.BoardRepository;
+import com.example.thingsFlow.validation.DeleteValidation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,23 +15,23 @@ import java.util.Optional;
 public class DeleteService {
 
     private final BoardRepository boardRepository;
+    private final DeleteValidation deleteValidation;
 
     @Transactional
-    public boolean boardDelete(long id, String password) {
-        Optional<Board> boardEntityWrapper = boardRepository.findById(id);
-        if (boardEntityWrapper.isPresent()) {
-            Board board = boardEntityWrapper.get();
-            if (password.equalsIgnoreCase(board.getPassword())) {
-                boardRepository.deleteById(id);
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            System.out.println("존재하지 않는 게시글 삭제 시도");
-            return false;
-        }
-
-
+    public Long validatePassword(Long id, Map map){
+        String oldPassword=getBoard(id).getPassword();
+        deleteValidation.validatePassword(map,oldPassword);
+        boardRepository.deleteById(id);
+        return 1L;
     }
+
+    private Board getBoard(Long id){
+        Optional<Board> optional=boardRepository.findById(id);
+        Board oldBoard;
+        if(optional.isPresent()){
+            oldBoard=optional.get();
+        }else throw new IllegalArgumentException("[ERROR] 존재하지 않는 게시물입니다");
+        return oldBoard;
+    }
+    
 }
