@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController("loadController")
 @RequestMapping(("/api"))
 @AllArgsConstructor
-@Api(tags = {"api"}, value = "게시글 조회 API 정보를 제공하는 Controller")
+@Api(tags = {"API"}, value = "게시글 조회 API 정보를 제공하는 Controller")
 public class LoadController {
 
     private LoadService loadService;

@@ -36,7 +36,7 @@ public class InsertService {
         return InsertDTO.builder()
                 .title(insertDTO.getTitle())
                 .content(insertDTO.getContent())
-                .password(insertDTO.getPassword())
+                .password(hashingPassword(insertDTO.getPassword()))
                 .weather(weather).build();
     }
 }

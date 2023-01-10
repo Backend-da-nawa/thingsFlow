@@ -20,16 +20,11 @@ public class InsertController {
     @PostMapping(value = "/api/insert")
     public Board insert(@RequestBody InsertDTO insertDTO) {
         String inputPassword = insertDTO.getPassword();
-        String reg = "^[A-Za-z[0-9]]{6,}$";
+        String reg = "^(?=.*\\d)[A-Za-z0-9]{6,}$";
 
         if (Pattern.matches(reg, inputPassword))
             return insertService.insert(insertDTO);
 
         return null;
-    }
-
-    @GetMapping("/api/hello")
-    public String test() {
-        return "hello";
     }
 }
