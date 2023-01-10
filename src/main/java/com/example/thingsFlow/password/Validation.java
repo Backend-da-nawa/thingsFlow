@@ -1,9 +1,11 @@
-package com.example.thingsFlow.validation;
+package com.example.thingsFlow.password;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.stereotype.Component;
 
-public class PasswordValidation {
-    public boolean checkHashedPassword(String hashedPassword, String storedPassword) {
-        return BCrypt.checkpw(hashedPassword, storedPassword);
+@Component
+public class Validation {
+    public boolean checkHashedPassword(String plainPassword, String storedPassword) {
+        return BCrypt.checkpw(plainPassword, storedPassword);
     }
 }
