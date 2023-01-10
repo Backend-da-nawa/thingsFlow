@@ -79,8 +79,7 @@
 
 ---
 ## ERD
-![img.png](img/ERD.png)
-
+![image](https://user-images.githubusercontent.com/95991654/211572573-82fe7604-6e1c-4f0e-aab0-a8ea03c593ee.png)
 ---
 ## Test-Code
 
@@ -101,10 +100,8 @@
   - Filter 기반으로 동작
   - Filter 는 Dispatcher Servlet 으로 가기전에 적용되므로 가장 먼저 URL 의 요청을 받지만, Interceptor 는 Dispatcher 와 Controller 사이에 위치
   - Spring MVC Request Lifecycle <br>
-  ![img.png](img/SpringSecurity1.png)
-  - Authentication Architecture <br>
-  ![img.png](img/SpringSecurity2.png)
-- 원인
+    ![image](https://user-images.githubusercontent.com/95991654/211572653-44522ea8-af23-4218-9a53-2889db6afdb8.png)  - Authentication Architecture <br>
+    ![image](https://user-images.githubusercontent.com/95991654/211572718-92c3adc0-9225-4d0f-8390-be804a88bdec.png)- 원인
   - 로그인 등 인증 수단이 없기에 Filter 에서 인가받지 않은 사용자로 분류되어 Dispatcher Servlet 으로 접근 불가
 - 해결
   1. 접근을 허용하는 경로를 설정
@@ -133,6 +130,5 @@
   - 애플리케이션 DB 사이에서 객체를 보관하는 일종의 가상 DB 역할
   - 따라서, Entity Manager 를 통해 저장하거나 조회하면 Entity Manager 는 영속성 컨텍스트 Entity 를 보관 및 관리
   - repository.update(entity)를 하지 않고 객체의 일부분만 바꿔줘도 영속성 컨텍스트로 인해 update 가 자동으로 수행
-  
-  ![img.png](img/PersistenceContext.png)
----
+
+![image](https://user-images.githubusercontent.com/95991654/211572780-8231205c-c2fc-4ac6-b8bd-9bc59b0c5dd7.png)---
