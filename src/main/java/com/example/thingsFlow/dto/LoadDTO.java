@@ -16,6 +16,7 @@ public class LoadDTO {
     private String content;
     private String password;
     private LocalDateTime time;
+    private String weather;
 
     public LoadDTO(Long id, String title, String content, String password) {
         this.id = id;
