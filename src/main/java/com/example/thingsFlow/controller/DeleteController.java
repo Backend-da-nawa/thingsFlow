@@ -5,7 +5,6 @@ import com.example.thingsFlow.service.DeleteService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -19,8 +18,8 @@ public class DeleteController {
 
     @DeleteMapping("/board/{id}")
     @ApiOperation(value = "delete 기능 API", notes = "BCrypt 함수로 비밀번호를 대조하고 일치시 데이터 삭제")
-    public Board validatePassword(@PathVariable("id") long id, @RequestBody Map<String, Object> map) {
-        return deleteService.validatePassword(id, map);
+    public Board delete(@PathVariable("id") long id, @RequestBody Map<String, Object> map) {
+        return deleteService.delete(id, map);
     }
 }
 
