@@ -1,6 +1,7 @@
 package com.example.thingsFlow.loadTest;
 
 import com.example.thingsFlow.dto.LoadDTO;
+import com.example.thingsFlow.dto.UpdateDTO;
 import com.example.thingsFlow.entity.Board;
 import com.example.thingsFlow.repository.BoardRepository;
 import com.example.thingsFlow.service.LoadService;
@@ -58,11 +59,8 @@ public class LoadTest {
         // given
         int page = 0;
         int size = 20;
-        Sort sort = Sort.by(Sort.Direction.DESC, "createdTime");
 
-        Pageable pageable = PageRequest.of(page, size, sort);
-
-        Slice<Board> slice = loadService.load(pageable);
+        Slice<Board> slice = loadService.load(page, size);
 
         // when
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/board")
@@ -87,8 +85,8 @@ public class LoadTest {
         String content = "Content_";
         String password = "Password_";
         for (int i = 0; i < 60; i++) {
-            list.add(Board.builder()
-                    .loadDTO(new LoadDTO(id + i, title + i, content + i, password + i))
+            list.add(Board.updateDTOBuilder()
+                    .updateDTO(new UpdateDTO(id + i, title + i, content + i, password + i))
                     .build());
             Thread.sleep(1000);
         }

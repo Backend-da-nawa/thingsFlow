@@ -1,27 +1,25 @@
 package com.example.thingsFlow.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
+@NoArgsConstructor
 @Data
 @Getter
-@AllArgsConstructor
-public class LoadDTO {
-
+public class UpdateDTO {
     private Long id;
     private String title;
     private String content;
     private String password;
-    private LocalDateTime time;
-    private String weather;
 
-    public LoadDTO(Long id, String title, String content, String password) {
-        this.id = id;
+
+    @Builder
+    public UpdateDTO(Long id,String title, String content, String password) {
+        this.id=id;
         this.title = title;
         this.content = content;
         this.password = password;
+
     }
 }

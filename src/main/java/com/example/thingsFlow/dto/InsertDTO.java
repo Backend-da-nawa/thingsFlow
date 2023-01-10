@@ -1,27 +1,24 @@
 package com.example.thingsFlow.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
+import com.example.thingsFlow.entity.Board;
+import lombok.*;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 
 @Data
-@Getter
-@AllArgsConstructor
-public class LoadDTO {
-
-    private Long id;
+@NoArgsConstructor
+public class InsertDTO {
     private String title;
     private String content;
     private String password;
-    private LocalDateTime time;
     private String weather;
 
-    public LoadDTO(Long id, String title, String content, String password) {
-        this.id = id;
+    @Builder
+    public InsertDTO(String title, String content, String password, String weather) {
         this.title = title;
         this.content = content;
         this.password = password;
+        this.weather = weather;
     }
 }

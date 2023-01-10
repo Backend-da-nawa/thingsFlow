@@ -1,24 +1,19 @@
 package com.example.thingsFlow.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-
-import java.time.LocalDateTime;
+import lombok.*;
 
 @Data
-@Getter
-@AllArgsConstructor
-public class LoadDTO {
-
+public class DeleteBoardDTO {
     private Long id;
     private String title;
     private String content;
     private String password;
-    private LocalDateTime time;
     private String weather;
+    private String uploaded;
 
-    public LoadDTO(Long id, String title, String content, String password) {
+
+    @Builder
+    public DeleteBoardDTO(Long id, String title, String content, String password) {
         this.id = id;
         this.title = title;
         this.content = content;

@@ -12,11 +12,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
 
-
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
-
     private static final String API_NAME = "Board API";
     private static final String NAME = "Dong-Yeol";
     private static final String URL = "https://github.com/Backend-da-nawa";
