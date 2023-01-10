@@ -2,6 +2,7 @@ package com.example.thingsFlow.entity;
 
 import com.example.thingsFlow.dto.InsertDTO;
 import com.example.thingsFlow.dto.LoadDTO;
+import com.example.thingsFlow.dto.UpdateDTO;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +35,7 @@ public class Board {
     @Column
     private String password;
 
+    @Column
     private String weather;
 
     @CreatedDate
@@ -45,11 +47,11 @@ public class Board {
     private LocalDateTime updatedTime;
 
     @Builder
-    public Board(LoadDTO loadDTO) {
-        this.id = loadDTO.getId();
-        this.content = loadDTO.getContent();
-        this.title = loadDTO.getTitle();
-        this.password = loadDTO.getPassword();
+    public Board(UpdateDTO updateDTO) {
+        this.id = updateDTO.getId();
+        this.title = updateDTO.getTitle();
+        this.content = updateDTO.getContent();
+        this.password = updateDTO.getPassword();
     }
 
     public Board(InsertDTO insertDTO) {
@@ -57,5 +59,10 @@ public class Board {
         this.content = insertDTO.getContent();
         this.password = BCrypt.hashpw(insertDTO.getPassword(), BCrypt.gensalt());
         this.weather = insertDTO.getWeather();
+    }
+
+    public void update(UpdateDTO updateDTO) {
+        this.title = updateDTO.getTitle();
+        this.content = updateDTO.getContent();
     }
 }

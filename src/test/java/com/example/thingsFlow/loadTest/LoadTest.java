@@ -1,6 +1,7 @@
 package com.example.thingsFlow.loadTest;
 
 import com.example.thingsFlow.dto.LoadDTO;
+import com.example.thingsFlow.dto.UpdateDTO;
 import com.example.thingsFlow.entity.Board;
 import com.example.thingsFlow.repository.BoardRepository;
 import com.example.thingsFlow.service.LoadService;
@@ -88,7 +89,7 @@ public class LoadTest {
         String password = "Password_";
         for (int i = 0; i < 60; i++) {
             list.add(Board.builder()
-                    .loadDTO(new LoadDTO(id + i, title + i, content + i, password + i))
+                    .updateDTO(new UpdateDTO(id + i, title + i, content + i, password + i))
                     .build());
             Thread.sleep(1000);
         }
