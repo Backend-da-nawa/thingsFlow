@@ -3,17 +3,17 @@
 ----
 
 ## Contributors
-- **김동열**
-- **조정빈**
-- **황승수**
+- **김동열** : 무한 스크롤, 예외처리, README 작성
+- **조정빈** : 게시글 수정/삭제
+- **황승수** : 게시글 등록
 ---
 ## Contents
-- [Tech & Stack]()
-- [Summary]()
-- [Feature List]()
-- [ERD]()
-- [TEST-CODE]()
-- [Issue]()
+- [Tech & Stack](#tech--stack)
+- [Summary](#summary)
+- [Feature List](#feature-list)
+- [ERD](#erd)
+- [TEST-CODE](#test-code)
+- [Issue](#issue)
 ---
 
 ## Tech & Stack
@@ -41,7 +41,9 @@
 <img src="https://img.shields.io/badge/Notion-000000?style=flat&logo=Notion&logoColor=white"><br>
 ---
 ## Summary
-- 내용
+- 사용자는 게시글을 등록, 수정, 삭제가 가능
+- 등록할 때 비밀번호를 설정하며 이는 수정 및 삭제에 검증 용도로 사용
+- 비밀번호는 6자리 이상이어야 하며, 숫자 1개 이상 필수 포함
 
 ---
 ## Feature List
@@ -59,6 +61,11 @@
     - 외부 API는 자유, https://www.weatherapi.com 에 가입 후 Real-time Weather API 사용하시는 것을 추천
     - 발급 받으신 API Key 는 전달해주지 않아도 됨
     - 게시글 작성 시 자동으로 데이터베이스에 추가되고, 수정은 불가
+- 게시글의 개수가 많을 때, 사용자가 앱이나 웹에서 스크롤을 내릴 때마다 오래된 글들이
+  계속 로드 되는 형태로 API 를 수정 [무한 스크롤]
+  - 게시글이 중복으로 나타나면 안됨
+  - 추가 로드는 20 개 단위
+
 
 ### Condition
 1. DBMS 는 PostgreSQL, MySQL, SQLite 중 하나를 사용
@@ -67,13 +74,12 @@
 4. ORM 을 사용
 
 ### API Specification
-
-
+머지 후 작성
 
 
 ---
 ## ERD
-
+![img.png](img/ERD.png)
 
 ---
 ## Test-Code
@@ -81,4 +87,52 @@
 
 ---
 ## Issue
-
+> org.springframework.context.ApplicationContextException: Failed to start bean 'documentationPluginsBootstrapper'; nested exception is java.lang.NullPointerException
+- 원인 
+  - Spring Boot 2.6버전 이후에 요청 경로를 ControllerHandler 에 매칭시키기 위한 것이 작동.
+  - spring.mvc.pathmatch.matching-strategy 기본 값이 ant_path_matcher 에서 path_pattern_parser 로 변경되어 있음
+- 해결
+  - application.properties 에 추가
+  > spring.mvc.pathmatch.matching-strategy=ant_path_matcher
+---
+> Spring Security 를 사용하고 Client 에서 Controller 로 Mapping 이 막히는 이슈
+- Spring Security 란,
+  - Spring 기반 애플리케이션의 보안(인증과 권한)을 담당하는 프레임워크
+  - Filter 기반으로 동작
+  - Filter 는 Dispatcher Servlet 으로 가기전에 적용되므로 가장 먼저 URL 의 요청을 받지만, Interceptor 는 Dispatcher 와 Controller 사이에 위치
+  - Spring MVC Request Lifecycle <br>
+  ![img.png](img/SpringSecurity1.png)
+  - Authentication Architecture <br>
+  ![img.png](img/SpringSecurity2.png)
+- 원인
+  - 로그인 등 인증 수단이 없기에 Filter 에서 인가받지 않은 사용자로 분류되어 Dispatcher Servlet 으로 접근 불가
+- 해결
+  1. 접근을 허용하는 경로를 설정
+  2. 인증 로직 구현
+---
+> CreationTimeStamp Annotation VS CreatedDate Annotation
+- CreationTimeStamp Annotation 
+  - Hibernate 에서 제공하는 어노테이션
+  - 데이터베이스로 넘어갈 때 자동으로 입력
+  - milliseconds 단위까지 입력 가능
+- CreatedDate
+  - JPA 에서 제공하는 어노테이션
+  - Spring Auditing 기술을 사용 
+    - JPA 는 JPA 고유 메모리 공간(context)을 이용해서 엔티티 객체들을 관리
+    - 관리되는 객체들이 변경되면 데이터에 반영되는 형식 -> 재사용하는 방식
+    - 객체의 생성, 수정 등 변화를 감지하고 감지되면 자동 입력
+    - microseconds 단위까지 입력 가능
+- CreationTimeStamp 대신 CreatedDate 를 지향함.
+  - CreationTimeStamp -> CreatedDate
+  - UpdateTimestamp -> LastModifiedDate
+---
+> 수정하는 작업에서 repository.save(entity) 를 실행할 때 오류 발생. <br>
+> 오류 내용 : 해당 entity 가 존재하기 때문에 저장할 수 없음 <- 대충 이런 느낌...
+- 영속성 컨텍스트
+  - 엔티티를 영구적으로 저장하는 환경
+  - 애플리케이션 DB 사이에서 객체를 보관하는 일종의 가상 DB 역할
+  - 따라서, Entity Manager 를 통해 저장하거나 조회하면 Entity Manager 는 영속성 컨텍스트 Entity 를 보관 및 관리
+  - repository.update(entity)를 하지 않고 객체의 일부분만 바꿔줘도 영속성 컨텍스트로 인해 update 가 자동으로 수행
+  
+  ![img.png](img/PersistenceContext.png)
+---

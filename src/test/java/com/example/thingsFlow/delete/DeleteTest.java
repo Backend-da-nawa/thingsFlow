@@ -70,7 +70,7 @@ public class DeleteTest {
         String content = "Content_";
         String password = "1111";
 
-        return boardRepository.save(Board.builder()
+        return boardRepository.save(Board.deleteDTOBuilder()
                 .deleteBoardDTO(DeleteBoardDTO.builder()
                         .id(id)
                         .title(title + id)
