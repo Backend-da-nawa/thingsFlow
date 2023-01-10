@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController("loadController")
@@ -22,7 +23,8 @@ public class LoadController {
 
     @GetMapping("/board")
     @ApiOperation(value = "조회할 게시글을 페이지로 반환하는 메서드")
-    public Slice<Board> load(final Pageable pageable) {
-        return loadService.load(pageable);
+    public Slice<Board> load(@RequestParam int page,
+                             @RequestParam int size) {
+        return loadService.load(page, size);
     }
 }
