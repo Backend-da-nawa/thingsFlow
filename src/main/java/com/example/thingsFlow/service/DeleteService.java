@@ -1,8 +1,9 @@
 package com.example.thingsFlow.service;
 
 import com.example.thingsFlow.entity.Board;
+import com.example.thingsFlow.password.Encryption;
 import com.example.thingsFlow.repository.BoardRepository;
-import com.example.thingsFlow.validation.DeleteValidation;
+import com.example.thingsFlow.password.Validation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,20 +15,14 @@ import java.util.Map;
 public class DeleteService {
 
     private final BoardRepository boardRepository;
-    private final DeleteValidation deleteValidation;
-
+    private final Validation validation;
     @Transactional
-    public Board validatePassword(Long id, Map map){
-        Board board = getBoard(id);
-        String oldPassword = board.getPassword();
-        deleteValidation.validatePassword(map, oldPassword);
-        boardRepository.delete(board);
-        return board;
+    public Board delete(Long id, Map<String, Object> map){
+        Board board = boardRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당하는 게시글이 존재하지 않습니다. id = " + id));
+        if (validation.checkHashedPassword((String) map.get("password"), board.getPassword())) {
+            boardRepository.delete(board);
+            return board;
+        } else throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
     }
-
-    private Board getBoard(Long id){
-        return boardRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("게시글이 존재하지 않습니다. id=" + id));
-    }
-
 }
