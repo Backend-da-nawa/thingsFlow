@@ -4,7 +4,6 @@ import com.example.thingsFlow.dto.InsertDTO;
 import com.example.thingsFlow.entity.Board;
 import com.example.thingsFlow.repository.BoardRepository;
 import com.example.thingsFlow.parser.WeatherAPIParser;
-import io.swagger.models.auth.In;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
@@ -12,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service("boardService")
 @AllArgsConstructor
-public class BoardService {
+public class InsertService {
     private final BoardRepository boardRepository;
 
     private String hashingPassword(String password) {

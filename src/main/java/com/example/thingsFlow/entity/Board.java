@@ -1,14 +1,13 @@
 package com.example.thingsFlow.entity;
-
+import com.example.thingsFlow.dto.DeleteBoardDTO;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import com.example.thingsFlow.dto.InsertDTO;
-import com.example.thingsFlow.dto.LoadDTO;
 import com.example.thingsFlow.dto.UpdateDTO;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import javax.persistence.*;
@@ -46,7 +45,7 @@ public class Board {
     @Column
     private LocalDateTime updatedTime;
 
-    @Builder
+    @Builder(builderMethodName = "updateDTOBuilder")
     public Board(UpdateDTO updateDTO) {
         this.id = updateDTO.getId();
         this.title = updateDTO.getTitle();
@@ -54,6 +53,7 @@ public class Board {
         this.password = updateDTO.getPassword();
     }
 
+    @Builder(builderMethodName = "insertDTOBuilder")
     public Board(InsertDTO insertDTO) {
         this.title = insertDTO.getTitle();
         this.content = insertDTO.getContent();
@@ -64,5 +64,13 @@ public class Board {
     public void update(UpdateDTO updateDTO) {
         this.title = updateDTO.getTitle();
         this.content = updateDTO.getContent();
+    }
+
+    @Builder(builderMethodName = "deleteDTOBuilder")
+    public Board(DeleteBoardDTO deleteBoardDTO) {
+        this.id = deleteBoardDTO.getId();
+        this.title = deleteBoardDTO.getTitle();
+        this.content = deleteBoardDTO.getContent();
+        this.password = deleteBoardDTO.getPassword();
     }
 }

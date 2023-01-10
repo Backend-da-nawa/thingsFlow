@@ -88,7 +88,7 @@ public class LoadTest {
         String content = "Content_";
         String password = "Password_";
         for (int i = 0; i < 60; i++) {
-            list.add(Board.builder()
+            list.add(Board.updateDTOBuilder()
                     .updateDTO(new UpdateDTO(id + i, title + i, content + i, password + i))
                     .build());
             Thread.sleep(1000);
