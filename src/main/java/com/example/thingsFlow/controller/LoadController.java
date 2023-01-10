@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@RestController("loadController")
 @RequestMapping(("/api"))
 @AllArgsConstructor
 @Api(tags = {"api"}, value = "게시글 조회 API 정보를 제공하는 Controller")

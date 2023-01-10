@@ -1,5 +1,6 @@
 package com.example.thingsFlow.entity;
 
+import com.example.thingsFlow.dto.InsertDTO;
 import com.example.thingsFlow.dto.LoadDTO;
 import lombok.Builder;
 import lombok.Getter;
@@ -7,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -32,6 +34,8 @@ public class Board {
     @Column
     private String password;
 
+    private String weather;
+
     @CreatedDate
     @Column
     private LocalDateTime createdTime;
@@ -46,5 +50,12 @@ public class Board {
         this.content = loadDTO.getContent();
         this.title = loadDTO.getTitle();
         this.password = loadDTO.getPassword();
+    }
+
+    public Board(InsertDTO insertDTO) {
+        this.title = insertDTO.getTitle();
+        this.content = insertDTO.getContent();
+        this.password = BCrypt.hashpw(insertDTO.getPassword(), BCrypt.gensalt());
+        this.weather = insertDTO.getWeather();
     }
 }
