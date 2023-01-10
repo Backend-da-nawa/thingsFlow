@@ -59,11 +59,8 @@ public class LoadTest {
         // given
         int page = 0;
         int size = 20;
-        Sort sort = Sort.by(Sort.Direction.DESC, "createdTime");
 
-        Pageable pageable = PageRequest.of(page, size, sort);
-
-        Slice<Board> slice = loadService.load(pageable);
+        Slice<Board> slice = loadService.load(page, size);
 
         // when
         RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/board")
