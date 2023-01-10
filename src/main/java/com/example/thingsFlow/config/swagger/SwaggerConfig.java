@@ -15,28 +15,37 @@ import java.util.ArrayList;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
+    private static final String API_NAME = "Board API";
+    private static final String NAME = "Dong-Yeol";
+    private static final String URL = "https://github.com/Backend-da-nawa";
+    private static final String E_MAIL = "ehfql6363@naver.com";
+    private static final String API_DESCRIPTION = "띵스플로우 API 명세서";
+    private String version;
+
+    private ApiInfo commonInfo() {
+        return new ApiInfo(
+                API_NAME,
+                API_DESCRIPTION,
+                version,
+                "#",
+                new Contact(NAME, URL, E_MAIL),
+                "License",
+                "#",
+                new ArrayList<>());
+    }
 
     @Bean
     public Docket apiV1() {
+        version = "V1";
+
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("백엔드 다나와")
+                .groupName(version)
+                .useDefaultResponseMessages(false)
                 .select()
+                //.apis(RequestHandlerSelectors.any())
                 .apis(RequestHandlerSelectors.basePackage("com.example.thingsFlow.controller"))
                 .paths(PathSelectors.any())
                 .build()
-                .apiInfo(apiInfo());
-    }
-
-    private ApiInfo apiInfo() {
-        return new ApiInfo(
-                "API 테스트",
-                "ThingsFlow Insert 기능 테스트 구현",
-                "Version 1.0",
-                "#",
-                new Contact("Contact Me", "https://github.com/Backend-da-nawa/thingsFlow", "ehfql6363@naver.com"),
-                null,
-                "#",
-                new ArrayList<>()
-        );
+                .apiInfo(commonInfo());
     }
 }
