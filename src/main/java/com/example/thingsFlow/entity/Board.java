@@ -57,7 +57,7 @@ public class Board {
     public Board(InsertDTO insertDTO) {
         this.title = insertDTO.getTitle();
         this.content = insertDTO.getContent();
-        this.password = BCrypt.hashpw(insertDTO.getPassword(), BCrypt.gensalt());
+        this.password = insertDTO.getPassword();
         this.weather = insertDTO.getWeather();
     }
 
