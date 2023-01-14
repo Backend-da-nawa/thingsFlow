@@ -1,7 +1,12 @@
 # ThingsFlow
 
 ----
+## Summary
+- 사용자는 게시글을 등록, 수정, 삭제가 가능
+- 등록할 때 비밀번호를 설정하며 이는 수정 및 삭제에 검증 용도로 사용
+- 비밀번호는 6자리 이상이어야 하며, 숫자 1개 이상 필수 포함
 
+---
 ## Contributors
 - **김동열** : 무한 스크롤, 예외처리, README 작성
 - **조정빈** : 게시글 수정/삭제
@@ -40,12 +45,6 @@
 <img src="https://img.shields.io/badge/Slack-4A154B?style=flat&logo=Slack&logoColor=white"><br>
 <img src="https://img.shields.io/badge/Notion-000000?style=flat&logo=Notion&logoColor=white"><br>
 ---
-## Summary
-- 사용자는 게시글을 등록, 수정, 삭제가 가능
-- 등록할 때 비밀번호를 설정하며 이는 수정 및 삭제에 검증 용도로 사용
-- 비밀번호는 6자리 이상이어야 하며, 숫자 1개 이상 필수 포함
-
----
 ## Feature List
 ### Simple List
 - 사용자는 게시글을 **등록**할 수 있음
@@ -72,10 +71,10 @@
 2. 프론트엔드는 직접 구현하지 않아도 됨
 3. 함께 일할 프론트엔드 개발자가 API 스펙을 보고 문제 없이 개발할 수 있어야 함
 4. ORM 을 사용
+---
 
 ### API Specification
-머지 후 작성
-
+[SWAGGER API DOC](http://localhost:8080/swagger-ui.html#/API)
 
 ---
 ## ERD
